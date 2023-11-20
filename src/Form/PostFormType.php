@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Post;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -21,11 +22,11 @@ class PostFormType extends AbstractType
                 'required' => false,
             ])
             ->add('categories', EntityType::class, [
-                'class' => 'App\Entity\Category', // Replace with the actual namespace of your Category entity
-                'choice_label' => 'name', // Property of Category entity to display in the dropdown
-                'multiple' => true, // Allow multiple category selection
-                'expanded' => true, // Render as checkboxes
-                'required' => false, // Allow no category selection
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false,
             ]);
     }
 
