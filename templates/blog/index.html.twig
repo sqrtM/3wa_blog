@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Create a New Post</h1>
+
+    <input type="text">test</input>
+
+    <h1>Posts</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h2><a href="/blog/post/{{ post.id }}">{{ post.title }}</a></h2>
+                <p>Created at: {{ post.createdAt|date('Y-m-d H:i:s') }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
