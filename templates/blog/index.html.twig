@@ -3,10 +3,7 @@
 {% block body %}
     <h1>Posts</h1>
 
-    {# All Posts Link #}
     <a href="/blog">All Posts</a>
-
-    {# Category Filter Links #}
     {% for category in categories %}
         <a href="/blog?category={{ category.name }}">{{ category.name }}</a>
     {% endfor %}
