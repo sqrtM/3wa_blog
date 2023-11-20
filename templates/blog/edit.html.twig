@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Update Post</button>
+    <a href="/blog/post/{{ form.vars.value.id }}/delete"><button type="button">Delete Post</button></a>
+    {{ form_end(form) }}
+{% endblock %}

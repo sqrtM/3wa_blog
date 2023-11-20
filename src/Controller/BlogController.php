@@ -5,16 +5,16 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostFormType;
 use App\Repository\PostRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 
 class BlogController extends AbstractController
 {
     public function __construct(
-        private PostRepository $repository
+        private readonly PostRepository $repository
     ) {
     }
 
@@ -33,6 +33,31 @@ class BlogController extends AbstractController
         $post = $this->repository->findOneBy(['id' => $postId]);
         return $this->render('blog/post.html.twig', [
             'post' => $post,
+        ]);
+    }
+
+    #[Route('/blog/post/{postId}/edit', name: 'app_edit')]
+    public function editPost(int $postId, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $post = $this->repository->findOneBy(['id' => $postId]);
+        $form = $this->createForm(PostFormType::class, $post);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Post $editedPost */
+            $postForm = $form->getData();
+
+            $post->setTitle($postForm->getTitle());
+            $post->setContent($postForm->getContent());
+
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("app_blog");
+        }
+
+        return $this->render('blog/edit.html.twig', [
+            'form' => $form,
         ]);
     }
 
@@ -55,5 +80,14 @@ class BlogController extends AbstractController
         return $this->render('blog/new.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    #[Route('/blog/post/{postId}/delete', name: 'app_delete')]
+    public function deletePost(int $postId, EntityManagerInterface $entityManager): Response
+    {
+        $post = $this->repository->findOneBy(['id' => $postId]);
+        $entityManager->remove($post);
+        $entityManager->flush();
+        return $this->redirectToRoute("app_blog");
     }
 }

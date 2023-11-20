@@ -9,4 +9,5 @@
             <p>Created at: {{ post.createdAt|date('Y-m-d H:i:s') }}</p>
         </li>
     </ul>
+    <a href="/blog/post/{{ post.id }}/edit"><button>edit</button></a>
 {% endblock %}
