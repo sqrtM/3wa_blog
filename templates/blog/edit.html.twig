@@ -3,10 +3,17 @@
 {% block body %}
     <h1>Edit Post</h1>
     {{ form_start(form) }}
+
+    {% if form.vars.value.image is not null %}
+        <img src="{{ asset('images/blog/' ~ form.vars.value.image) }}" alt="Current Post Image" style="max-width: 100%; height: auto; margin-bottom: 10px;">
+    {% endif %}
+
     {{ form_widget(form) }}
+
     <button type="submit">Update Post</button>
     <a href="/blog/post/{{ form.vars.value.id }}/delete">
         <button type="button">Delete Post</button>
     </a>
+
     {{ form_end(form) }}
 {% endblock %}

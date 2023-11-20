@@ -49,6 +49,8 @@ class BlogController extends AbstractController
 
             $post->setTitle($postForm->getTitle());
             $post->setContent($postForm->getContent());
+            $post->setImage($postForm->getImage());
+            $post->setImageFile($postForm->getImageFile());
             $post->setUpdatedAt(new \DateTimeImmutable());
 
             $entityManager->persist($post);

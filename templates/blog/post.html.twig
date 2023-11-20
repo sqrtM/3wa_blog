@@ -3,10 +3,17 @@
 {% block body %}
     <h1>{{ post.title }}</h1>
     <p>{{ post.content }}</p>
+
+    {% if post.image is not null %}
+        <img src="{{ asset('images/blog/' ~ post.image) }}" alt="Post Image" style="max-width: 100%; height: auto;">
+    {% endif %}
+
     {% if post.updatedAt is not null %}
         <p>Updated at: {{ post.updatedAt|date('Y-m-d H:i:s') }}</p>
     {% endif %}
+
     <p>Created at: {{ post.createdAt|date('Y-m-d H:i:s') }}</p>
+
     <a href="/blog/post/{{ post.id }}/edit">
         <button>Edit</button>
     </a>
