@@ -1,17 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}blog :){% endblock %}</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-    {% block stylesheets %}
-    {% endblock %}
-
-    {% block javascripts %}
-    {% endblock %}
 </head>
+<style>
+    /* Reset some default styles */
+    body, h1, h2, p, ul, li {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 1em;
+        text-align: center;
+    }
+
+    nav ul {
+        list-style: none;
+    }
+
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    main {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1em;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .copyleft {
+        display: inline-block;
+        transform: rotate(180deg);
+    }
+</style>
 <body>
-{% block body %}{% endblock %}
+<header>
+    <h1>blog :)</h1>
+    <nav>
+        <ul>
+            <li><a href="/blog">Home</a></li>
+            <li><a href="/blog/new">Write a New Post</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+</main>
+
+<footer>
+    <span class="copyleft">&copy;</span> 2023 mason :)
+</footer>
 </body>
 </html>
