@@ -6,9 +6,9 @@
         <li>
             <h2>{{ post.title }}</h2>
             <p>{{ post.content }}</p>
-                {% if post.updatedAt is not null %}
-            <p>Updated at: {{ post.updatedAt|date('Y-m-d H:i:s') }}</p>
-                {% endif %}
+            {% if post.updatedAt is not null %}
+                <p>Updated at: {{ post.updatedAt|date('Y-m-d H:i:s') }}</p>
+            {% endif %}
             <p>Created at: {{ post.createdAt|date('Y-m-d H:i:s') }}</p>
         </li>
     </ul>

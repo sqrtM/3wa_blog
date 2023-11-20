@@ -2,7 +2,9 @@
 
 {% block body %}
     <h1>Posts</h1>
-    <a href="/blog/new"><button>write a new post</button></a>
+    <a href="/blog/new">
+        <button>write a new post</button>
+    </a>
     <ul>
         {% for post in posts %}
             <li>
