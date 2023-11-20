@@ -13,6 +13,11 @@
     {% endif %}
 
     <p>Created at: {{ post.createdAt|date('Y-m-d H:i:s') }}</p>
+    <p>Categories:
+        {% for category in post.categories %}
+            <span>{{ category.name }}</span>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
 
     <a href="/blog/post/{{ post.id }}/edit">
         <button>Edit</button>

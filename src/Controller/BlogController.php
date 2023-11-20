@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Post;
 use App\Form\PostFormType;
+use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class BlogController extends AbstractController
 {
     public function __construct(
-        private readonly PostRepository $repository
+        private readonly PostRepository $repository,
+        private readonly CategoryRepository $categories
     ) {
     }
 
@@ -24,6 +27,7 @@ class BlogController extends AbstractController
         $posts = $this->repository->findAllOrderedByDate();
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
+            'categories' => $this->categories->findAll()
         ]);
     }
 
