@@ -21,6 +21,17 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findAllOrderedByDate(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy(
+                'CASE WHEN p.updatedAt IS NOT NULL THEN p.updatedAt ELSE p.createdAt END',
+                'DESC'
+            )
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

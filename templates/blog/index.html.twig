@@ -2,11 +2,18 @@
 
 {% block body %}
     <h1>Posts</h1>
+    <a href="/blog/new"><button>write a new post</button></a>
     <ul>
         {% for post in posts %}
             <li>
                 <h2><a href="/blog/post/{{ post.id }}">{{ post.title }}</a></h2>
-                <p>Created at: {{ post.createdAt|date('Y-m-d H:i:s') }}</p>
+                <p>
+                    {% if post.updatedAt is not null %}
+                        Updated at: {{ post.updatedAt|date('Y-m-d H:i:s') }}
+                    {% else %}
+                        Created at: {{ post.createdAt|date('Y-m-d H:i:s') }}
+                    {% endif %}
+                </p>
             </li>
         {% endfor %}
     </ul>

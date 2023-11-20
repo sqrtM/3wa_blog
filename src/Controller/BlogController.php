@@ -21,7 +21,7 @@ class BlogController extends AbstractController
     #[Route('/blog', name: 'app_blog')]
     public function index(): Response
     {
-        $posts = $this->repository->findAll();
+        $posts = $this->repository->findAllOrderedByDate();
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
         ]);
@@ -49,6 +49,7 @@ class BlogController extends AbstractController
 
             $post->setTitle($postForm->getTitle());
             $post->setContent($postForm->getContent());
+            $post->setUpdatedAt(new \DateTimeImmutable());
 
             $entityManager->persist($post);
             $entityManager->flush();
@@ -70,7 +71,8 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Post $newPost */
             $newPost = $form->getData();
-
+            $newPost->setCreatedAt(new \DateTimeImmutable());
+            $newPost->setUpdatedAt(null);
             $entityManager->persist($newPost);
             $entityManager->flush();
 

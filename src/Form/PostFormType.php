@@ -14,7 +14,6 @@ class PostFormType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('createdAt')
         ;
     }
 
